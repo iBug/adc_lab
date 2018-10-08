@@ -1,5 +1,6 @@
 *.cache
 *.runs
+*.log
 
 *.log
 *.jou
