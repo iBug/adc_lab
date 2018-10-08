@@ -26,4 +26,8 @@ module lab1_1_1(
     input s,
     output m
     );
+    wire s_not, x_out, y_out;
+    not (s_not, s);
+    and (x_out, x, s_not), (y_out, y, s);
+    or (m, x_out, y_out);
 endmodule
