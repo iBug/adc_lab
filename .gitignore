@@ -1,1 +1,13 @@
 *.cache
+*.runs
+
+*.log
+*.jou
+
+# Everything start with a dot except Git stuff
+.*
+!.gitignore
+!.gitattribute
+
+# Stupid stuff
+*webtalk*
