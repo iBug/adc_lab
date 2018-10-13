@@ -1,0 +1,7 @@
+0.6
+2018.2
+Jun 14 2018
+20:07:38
+/home/vmware/Desktop/adc_lab/lab3_1_1/lab3_1_1.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab3_1_1/lab3_1_1.srcs/sim_1/imports/Desktop/decoder_3to8_dataflow_tb.v,1539446033,verilog,,,,decoder_3to8_dataflow_tb,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab3_1_1/lab3_1_1.srcs/sources_1/new/decoder_3to8.v,1539446024,verilog,,/home/vmware/Desktop/adc_lab/lab3_1_1/lab3_1_1.srcs/sim_1/imports/Desktop/decoder_3to8_dataflow_tb.v,,decoder_3to8,,,,,,,,
