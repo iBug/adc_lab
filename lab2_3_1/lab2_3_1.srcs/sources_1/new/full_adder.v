@@ -23,11 +23,11 @@
 module full_adder(
     input a,
     input b,
-    input ci,
+    input cin,
     output s,
-    output co
+    output cout
     );
     
-    assign s = a ^ b ^ ci;
-    assign co = (a & b) | ((a | b) & ci);
+    assign s = a ^ b ^ cin;
+    assign cout = (a & b) | ((a | b) & cin);
 endmodule
