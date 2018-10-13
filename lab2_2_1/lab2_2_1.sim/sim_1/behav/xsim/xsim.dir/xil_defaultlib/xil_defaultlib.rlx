@@ -1,0 +1,12 @@
+0.6
+2018.2
+Jun 14 2018
+20:07:38
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sim_1/imports/Desktop/lab2_2_1_partA_tb.v,1539415810,verilog,,,,lab2_2_1_partA_tb,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/imports/new/bcd_to_7_seg.v,1539414951,verilog,,/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/comparator_dataflow.v,,bcd_to_7_seg,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/comparator_dataflow.v,1539414951,verilog,,/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/lab2_2_1_partA.v,,comparator_dataflow,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/lab2_2_1.v,1539414951,verilog,,/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sim_1/imports/Desktop/lab2_2_1_partA_tb.v,,lab2_2_1,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/lab2_2_1_partA.v,1539415917,verilog,,/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/lab2_circuitA_dataflow.v,,lab2_2_1_partA,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/lab2_circuitA_dataflow.v,1539414951,verilog,,/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/mux_2to1.v,,lab2_circuitA_dataflow,,,,,,,,
+/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/mux_2to1.v,1539414951,verilog,,/home/vmware/Desktop/adc_lab/lab2_2_1/lab2_2_1.srcs/sources_1/new/lab2_2_1.v,,mux_2to1,,,,,,,,

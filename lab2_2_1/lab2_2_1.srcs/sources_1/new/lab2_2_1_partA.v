@@ -29,11 +29,11 @@ module lab2_2_1_partA(
     wire comparator_v;
     wire [2:0] circA_v;
     
-    comparator_dataflow(v, comparator_v);
+    comparator_dataflow comparator(v, comparator_v);
     assign z = comparator_v;
-    mux_2to1(v[3], 0, comparator_v, m[3]);
-    mux_2to1(v[2], circA_v[2], comparator_v, m[2]);
-    mux_2to1(v[1], circA_v[1], comparator_v, m[1]);
-    mux_2to1(v[0], circA_v[0], comparator_v, m[0]);
-    lab2_circuitA_dataflow({v[2], v[1], v[0]}, circA_v);
+    mux_2to1 mux_3(v[3], 0, comparator_v, m[3]);
+    mux_2to1 mux_2(v[2], circA_v[2], comparator_v, m[2]);
+    mux_2to1 mux_1(v[1], circA_v[1], comparator_v, m[1]);
+    mux_2to1 mux_0(v[0], circA_v[0], comparator_v, m[0]);
+    lab2_circuitA_dataflow circuitA({v[2], v[1], v[0]}, circA_v);
 endmodule
