@@ -56,7 +56,7 @@ module seg_manager(
         end
         else begin
             ctrl <= 0;
-            #500 an = an_s[select];
+            #5000 an = an_s[select];
         end
     end
 endmodule
