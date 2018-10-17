@@ -1,0 +1,12 @@
+
+{ 
+    crc :  5035807370494329097  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto 0365c058e1a4400c835829357d38bb98 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot calc_even_parity_task_tb_behav xil_defaultlib.calc_even_parity_task_tb xil_defaultlib.glbl" , 
+    buildDate : "Jun 14 2018" , 
+    buildTime : "20:07:38" , 
+    linkCmd : "/usr/bin/gcc -Wa,-W  -O -fPIC  -m64  -Wl,--unresolved-symbols=ignore-all  -o \"xsim.dir/calc_even_parity_task_tb_behav/xsimk\"   \"xsim.dir/calc_even_parity_task_tb_behav/obj/xsim_0.lnx64.o\" \"xsim.dir/calc_even_parity_task_tb_behav/obj/xsim_1.lnx64.o\" \"/opt/Xilinx/Vivado/2018.2/lib/lnx64.o/librdi_simulator_kernel.so\"  \"/opt/Xilinx/Vivado/2018.2/lib/lnx64.o/librdi_simbridge_kernel.so\"" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 
