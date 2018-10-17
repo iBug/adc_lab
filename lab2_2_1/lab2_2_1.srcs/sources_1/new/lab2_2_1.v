@@ -22,15 +22,14 @@
 
 module lab2_2_1(
     input [3:0] v,
-    output z,
+    input CLK100MHZ,
     output [7:0] AN,
     output [6:0] seg
     );
     
-    wire vc;
+    wire z;
     wire [3:0] m;
     
-    assign AN = 8'hFE;
-    bcd_to_7_seg(m, seg);
+    seg_manager seg_core(m, z, CLK100MHZ, seg, AN);
     lab2_2_1_partA(v, z, m);
 endmodule
