@@ -28,23 +28,7 @@ module main(
     output [15:0] LED
     );
     
-    reg clk;
-    integer cycle;
-    
     assign LED = {X3, X2, X1, X0};
     
-    seg_manager core(X0, X1, X2, X3, clk, SEG, AN);
-    
-    initial begin
-        cycle = 0;
-        clk = 0;
-    end
-    
-    always @ (posedge CLK100MHZ) begin
-        cycle = cycle + 1;
-        if (cycle >= 10000) begin
-            cycle <= 0;
-            clk <= ~clk;
-        end
-    end
+    seg_manager core(X0, X1, X2, X3, CLK100MHZ, SEG, AN);
 endmodule

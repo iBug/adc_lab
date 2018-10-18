@@ -30,7 +30,7 @@ module seg_manager(
     wire [3:0] x_s, x_s0, x_s1, x_s2, x_s3;
     reg [1:0] select;
     reg [7:0] an_s [3:0];
-    reg ctrl;
+    integer cycle;
     
     assign x_s0 = {x3[0], x2[0], x1[0], x0[0]};
     assign x_s1 = {x3[1], x2[1], x1[1], x0[1]};
@@ -45,18 +45,20 @@ module seg_manager(
         an_s[1] = 8'hFD;
         an_s[2] = 8'hFB;
         an_s[3] = 8'hF7;
+        cycle = 0;
     end
     
     always @ (posedge clk)
     begin
-        if (ctrl == 0) begin
-            ctrl <= 1;
-            an = 8'hFF;
+        cycle = (cycle + 1) % 10000;
+        if (cycle == 0) begin
             select <= select + 2'd1;
         end
-        else begin
-            ctrl <= 0;
-            #5000 an = an_s[select];
+        else if (cycle == 1500) begin
+            an = an_s[select];
+        end
+        else if (cycle == 9500) begin
+            an = 8'hFF;
         end
     end
 endmodule
