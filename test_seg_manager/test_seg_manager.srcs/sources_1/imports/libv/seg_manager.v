@@ -21,30 +21,48 @@
 
 
 module seg_manager(
-    input [3:0] x0, x1, x2, x3,
-    input clk,
+    input [15:0] sw,
+    input clk,  // Please supply 100 MHz
     output [6:0] seg,
     output reg [7:0] an
     );
     
-    wire [3:0] x_s, x_s0, x_s1, x_s2, x_s3;
-    reg [1:0] select;
-    reg [7:0] an_s [3:0];
+    reg [3:0] x;
+    wire [3:0] x_s [7:0];
+    wire [15:0] x_i [7:0];
+    reg [7:0] an_s [7:0];
+    reg [2:0] select;
     integer cycle;
     
-    assign x_s0 = {x3[0], x2[0], x1[0], x0[0]};
-    assign x_s1 = {x3[1], x2[1], x1[1], x0[1]};
-    assign x_s2 = {x3[2], x2[2], x1[2], x0[2]};
-    assign x_s3 = {x3[3], x2[3], x1[3], x0[3]};
-    assign x_s = {x_s3[select], x_s2[select], x_s1[select], x_s0[select]};
+    assign x_i[0] = (sw / 1);
+    assign x_i[1] = (sw / 10);
+    assign x_i[2] = (sw / 100);
+    assign x_i[3] = (sw / 1000);
+    assign x_i[4] = (sw / 10000);
+    assign x_i[5] = (sw / 100000);
+    assign x_i[6] = (sw / 1000000);
+    assign x_i[7] = (sw / 10000000);
     
-    bcd_to_7_seg bcd(x_s, seg);
+    assign x_s[0] = (x_i[0] % 10);
+    assign x_s[1] = (x_i[1] == 0) ? 15 : (x_i[1] % 10);
+    assign x_s[2] = (x_i[2] == 0) ? 15 : (x_i[2] % 10);
+    assign x_s[3] = (x_i[3] == 0) ? 15 : (x_i[3] % 10);
+    assign x_s[4] = (x_i[4] == 0) ? 15 : (x_i[4] % 10);
+    assign x_s[5] = (x_i[5] == 0) ? 15 : (x_i[5] % 10);
+    assign x_s[6] = (x_i[6] == 0) ? 15 : (x_i[6] % 10);
+    assign x_s[7] = (x_i[7] == 0) ? 15 : (x_i[7] % 10);
+    
+    bcd_to_7_seg bcd(x, seg);
     
     initial begin
         an_s[0] = 8'hFE;
         an_s[1] = 8'hFD;
         an_s[2] = 8'hFB;
         an_s[3] = 8'hF7;
+        an_s[4] = 8'hEF;
+        an_s[5] = 8'hDF;
+        an_s[6] = 8'hBF;
+        an_s[7] = 8'h7F;
         cycle = 0;
     end
     
@@ -52,7 +70,8 @@ module seg_manager(
     begin
         cycle = (cycle + 1) % 10000;
         if (cycle == 0) begin
-            select <= select + 2'd1;
+            select = select + 2'd1;
+            x <= x_s[select];
         end
         else if (cycle == 1500) begin
             an = an_s[select];

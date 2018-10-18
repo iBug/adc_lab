@@ -21,14 +21,14 @@
 
 
 module main(
-    input [3:0] X0, X1, X2, X3,
+    input [15:0] SW,
     input CLK100MHZ,
     output [6:0] SEG,
     output [7:0] AN,
     output [15:0] LED
     );
     
-    assign LED = {X3, X2, X1, X0};
+    assign LED = SW;
     
-    seg_manager core(X0, X1, X2, X3, CLK100MHZ, SEG, AN);
+    seg_manager core(SW, CLK100MHZ, SEG, AN);
 endmodule

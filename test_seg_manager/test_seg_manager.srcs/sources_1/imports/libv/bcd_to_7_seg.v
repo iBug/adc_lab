@@ -38,6 +38,7 @@ module bcd_to_7_seg(
             4'b0111: seg <= 7'b1111000;
             4'b1000: seg <= 7'b0000000;
             4'b1001: seg <= 7'b0010000;
+            4'b1111: seg <= 7'b1111111;
             default: seg <= 7'b0111111;
         endcase
     end
