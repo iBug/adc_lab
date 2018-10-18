@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="38" Path="/home/vmware/Desktop/adc_lab/lab3_1_1/lab3_1_1.xpr">
+<Project Version="7" Minor="38" Path="/home/vmware/adc_lab/lab3_1_1/lab3_1_1.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="600bff876a6449e0ad4c15c329ad81a9"/>
@@ -88,7 +88,7 @@
       </Config>
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1">
-      <File Path="$PSRCDIR/sim_1/imports/Desktop/decoder_3to8_dataflow_tb.v">
+      <File Path="$PSRCDIR/sim_1/imports/decoder_3to8_dataflow_tb.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../decoder_3to8_dataflow_tb.v"/>
           <Attr Name="ImportTime" Val="1360784882"/>

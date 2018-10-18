@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="38" Path="/home/vmware/Desktop/adc_lab/lab4_1_1/lab4_1_1.xpr">
+<Project Version="7" Minor="38" Path="/home/vmware/adc_lab/lab4_1_1/lab4_1_1.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="2ba1689b86254ad88bba1d34ce88a759"/>

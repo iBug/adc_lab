@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="38" Path="/home/vmware/Desktop/adc_lab/lab1_2_2/lab1_2_2.xpr">
+<Project Version="7" Minor="38" Path="/home/vmware/adc_lab/lab1_2_2/lab1_2_2.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="3c602033de6a4c5184899c94fdf8c6a5"/>
@@ -89,7 +89,7 @@
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sim_1/imports/Desktop/lab1_2_2_tb.v">
+      <File Path="$PSRCDIR/sim_1/imports/lab1_2_2_tb.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../lab1_2_2_tb.v"/>
           <Attr Name="ImportTime" Val="1538973633"/>

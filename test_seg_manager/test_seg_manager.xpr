@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="38" Path="/home/vmware/Desktop/adc_lab/test_seg_manager/test_seg_manager.xpr">
+<Project Version="7" Minor="38" Path="/home/vmware/adc_lab/test_seg_manager/test_seg_manager.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="be40c8d34eb54e8ba3ebff86683261e3"/>
