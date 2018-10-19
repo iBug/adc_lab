@@ -21,14 +21,12 @@
 
 
 module lab2_1_1(
-    input BTNC,
-    input enable,
     output [6:0] seg,
     output [7:0] AN
     );
     
-    assign AN = 8'hFE;
     wire [3:0] s;
+    assign s = 4'd3;
+    assign AN = 8'hFE;
     bcd_to_7_seg(s, seg);
-    btn_counter(BTNC, enable, s);
 endmodule
