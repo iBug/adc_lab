@@ -19,6 +19,31 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+module mux_2to1(
+    input a,
+    input b,
+    input s,
+    output c
+    );
+    
+    assign c = (~s & a) | (s & b);
+endmodule
+
+module comparator_dataflow(
+    input [3:0] v,
+    output z
+    );
+    
+    assign z = v[3] & (v[2] | v[1]);
+endmodule
+
+module lab2_circuitA_dataflow(
+    input [2:0] vi,
+    output [2:0] vo
+    );
+    
+    assign vo = vi - 4'd2;
+endmodule
 
 module lab2_2_1_partA(
     input [3:0] v,
