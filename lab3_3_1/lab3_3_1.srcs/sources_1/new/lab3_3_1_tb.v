@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/14/2018 01:36:56 PM
+// Create Date: 10/26/2018 01:54:49 PM
 // Design Name: 
-// Module Name: lab3_3_1
+// Module Name: lab3_3_1_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,19 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module lab3_3_1(
-    input [1:0] a,
-    input [1:0] b,
-    output eq,
-    output lt,
-    output gt
-    );
+module lab3_3_1_tb;
+    reg [1:0] a, b;
+    wire lt, eq, gt;
+    integer i, j;
     
-    reg [2:0] ROM_cmp [15:0];
-    wire [3:0] addr;
+    lab3_3_1 DUT (.a(a), .b(b), .lt(lt), .eq(eq), .gt(gt));
     
-    assign addr = {a, b};
-    assign {lt, gt, eq} = ROM_cmp[addr];
-    
-    initial $readmemb("lab3_3_1.txt", ROM_cmp, 0, 15);
+    initial begin
+        for (i = 0; i < 4; i = i + 1)
+            for (j = 0; j < 4; j = j + 1) begin
+                a = i; b = j;
+                #10 ;
+            end
+        $finish();
+    end
 endmodule
