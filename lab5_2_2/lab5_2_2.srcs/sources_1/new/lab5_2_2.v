@@ -39,8 +39,11 @@ module lab5_2_2(
             else if (S & ~D) begin
                 Qd = 1;
             end
+            else if (S & D) begin
+                Qd = 1'bx;
+            end
             else begin
-                Qd = Qd;
+                Qd = Qd;  // Nothing changed
             end
         end
     end
