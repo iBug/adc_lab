@@ -23,14 +23,26 @@
 module lab5_2_2(
     input D,
     input clk,
+    input S,
     output reg Qa,
     output reg Qb,
-    output reg Qc
+    output reg Qc,
+    output reg Qd
     );
     
-    always @ D begin
-        if (clk)
+    always @(clk or D or S) begin
+        if (clk) begin
             Qa = D;
+            if (D & ~S) begin
+                Qd = 0;
+            end
+            else if (S & ~D) begin
+                Qd = 1;
+            end
+            else begin
+                Qd = Qd;
+            end
+        end
     end
     always @ (posedge clk) begin
         Qb = D;
