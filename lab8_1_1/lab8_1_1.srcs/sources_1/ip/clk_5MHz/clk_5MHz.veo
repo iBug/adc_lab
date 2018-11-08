@@ -55,7 +55,7 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// clk_out1_____5.000______0.000______50.0______631.442____346.848
+// _clk_out_____5.000______0.000______50.0______631.442____346.848
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -68,13 +68,13 @@
 
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 
-  clk_wiz_0 instance_name
+  clk_5MHz instance_name
    (
     // Clock out ports
-    .clk_out1(clk_out1),     // output clk_out1
+    .clk_out(clk_out),     // output clk_out
     // Status and control signals
     .reset(reset), // input reset
     .locked(locked),       // output locked
    // Clock in ports
-    .CLK100MHZ(CLK100MHZ));      // input CLK100MHZ
+    .clk_in(clk_in));      // input clk_in
 // INST_TAG_END ------ End INSTANTIATION Template ---------

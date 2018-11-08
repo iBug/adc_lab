@@ -1,11 +1,11 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
-// Date        : Thu Nov  1 22:47:31 2018
+// Date        : Thu Nov  8 08:57:23 2018
 // Host        : VMware running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode funcsim
-//               /home/vmware/adc_lab/lab8_1_1/lab8_1_1.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_sim_netlist.v
-// Design      : clk_wiz_0
+//               /home/vmware/adc_lab/lab8_1_1/lab8_1_1.srcs/sources_1/ip/clk_5MHz/clk_5MHz_sim_netlist.v
+// Design      : clk_5MHz
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
 // Device      : xc7a100tcsg324-1
@@ -13,45 +13,45 @@
 `timescale 1 ps / 1 ps
 
 (* NotValidForBitStream *)
-module clk_wiz_0
-   (clk_out1,
+module clk_5MHz
+   (clk_out,
     reset,
     locked,
-    CLK100MHZ);
-  output clk_out1;
+    clk_in);
+  output clk_out;
   input reset;
   output locked;
-  input CLK100MHZ;
+  input clk_in;
 
-  (* IBUF_LOW_PWR *) wire CLK100MHZ;
-  wire clk_out1;
+  (* IBUF_LOW_PWR *) wire clk_in;
+  wire clk_out;
   wire locked;
   wire reset;
 
-  clk_wiz_0_clk_wiz_0_clk_wiz inst
-       (.CLK100MHZ(CLK100MHZ),
-        .clk_out1(clk_out1),
+  clk_5MHz_clk_5MHz_clk_wiz inst
+       (.clk_in(clk_in),
+        .clk_out(clk_out),
         .locked(locked),
         .reset(reset));
 endmodule
 
-(* ORIG_REF_NAME = "clk_wiz_0_clk_wiz" *) 
-module clk_wiz_0_clk_wiz_0_clk_wiz
-   (clk_out1,
+(* ORIG_REF_NAME = "clk_5MHz_clk_wiz" *) 
+module clk_5MHz_clk_5MHz_clk_wiz
+   (clk_out,
     reset,
     locked,
-    CLK100MHZ);
-  output clk_out1;
+    clk_in);
+  output clk_out;
   input reset;
   output locked;
-  input CLK100MHZ;
+  input clk_in;
 
-  wire CLK100MHZ;
-  wire CLK100MHZ_clk_wiz_0;
-  wire clk_out1;
-  wire clk_out1_clk_wiz_0;
-  wire clkfbout_buf_clk_wiz_0;
-  wire clkfbout_clk_wiz_0;
+  wire clk_in;
+  wire clk_in_clk_5MHz;
+  wire clk_out;
+  wire clk_out_clk_5MHz;
+  wire clkfbout_buf_clk_5MHz;
+  wire clkfbout_clk_5MHz;
   wire locked;
   wire reset;
   wire NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED;
@@ -73,8 +73,8 @@ module clk_wiz_0_clk_wiz_0_clk_wiz
 
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkf_buf
-       (.I(clkfbout_clk_wiz_0),
-        .O(clkfbout_buf_clk_wiz_0));
+       (.I(clkfbout_clk_5MHz),
+        .O(clkfbout_buf_clk_5MHz));
   (* BOX_TYPE = "PRIMITIVE" *) 
   (* CAPACITANCE = "DONT_CARE" *) 
   (* IBUF_DELAY_VALUE = "0" *) 
@@ -82,12 +82,12 @@ module clk_wiz_0_clk_wiz_0_clk_wiz
   IBUF #(
     .IOSTANDARD("DEFAULT")) 
     clkin1_ibufg
-       (.I(CLK100MHZ),
-        .O(CLK100MHZ_clk_wiz_0));
+       (.I(clk_in),
+        .O(clk_in_clk_5MHz));
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkout1_buf
-       (.I(clk_out1_clk_wiz_0),
-        .O(clk_out1));
+       (.I(clk_out_clk_5MHz),
+        .O(clk_out));
   (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
@@ -139,15 +139,15 @@ module clk_wiz_0_clk_wiz_0_clk_wiz
     .SS_MOD_PERIOD(10000),
     .STARTUP_WAIT("FALSE")) 
     mmcm_adv_inst
-       (.CLKFBIN(clkfbout_buf_clk_wiz_0),
-        .CLKFBOUT(clkfbout_clk_wiz_0),
+       (.CLKFBIN(clkfbout_buf_clk_5MHz),
+        .CLKFBOUT(clkfbout_clk_5MHz),
         .CLKFBOUTB(NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED),
         .CLKFBSTOPPED(NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED),
-        .CLKIN1(CLK100MHZ_clk_wiz_0),
+        .CLKIN1(clk_in_clk_5MHz),
         .CLKIN2(1'b0),
         .CLKINSEL(1'b1),
         .CLKINSTOPPED(NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED),
-        .CLKOUT0(clk_out1_clk_wiz_0),
+        .CLKOUT0(clk_out_clk_5MHz),
         .CLKOUT0B(NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED),
         .CLKOUT1(NLW_mmcm_adv_inst_CLKOUT1_UNCONNECTED),
         .CLKOUT1B(NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED),
