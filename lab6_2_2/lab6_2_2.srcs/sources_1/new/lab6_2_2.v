@@ -44,7 +44,7 @@ module T_ff(
     
     wire D;
     xor xor0(D, T, Q);
-    D_ff(D, clk, clr_n, Q);
+    D_ff internal_D (D, clk, clr_n, Q);
 endmodule
 
 module lab6_2_2(
