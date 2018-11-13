@@ -68,7 +68,7 @@ module seg_manager(
     
     always @ (posedge clk)
     begin
-        cycle = (cycle + 1) % 10000;
+        cycle = (cycle + 1) % 20000;
         if (cycle == 0) begin
             select = select + 2'd1;
             x <= x_s[select];
@@ -76,7 +76,7 @@ module seg_manager(
         else if (cycle == 1500) begin
             an = an_s[select];
         end
-        else if (cycle == 9500) begin
+        else if (cycle == 19500) begin
             an = 8'hFF;
         end
     end
