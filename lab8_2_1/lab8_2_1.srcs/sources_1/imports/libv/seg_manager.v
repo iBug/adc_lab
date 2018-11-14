@@ -44,42 +44,32 @@ module bcd_to_7_seg(
 endmodule
 
 module seg_manager(
-    input [3:0] x0, x1,
-    input clk,  // Please supply 100 MHz
+    input [3:0] n0, n1,
+    input clk,  // Please supply 5 MHz
     output [6:0] seg,
-    output reg [7:0] an
+    output [7:0] an
     );
     
-    reg [3:0] x;
-    wire [3:0] x_s [1:0];
-    reg [7:0] an_s [1:0];
+    wire [3:0] x;
     reg select;
     integer cycle;
 
-    assign x_s[0] = x0;
-    assign x_s[1] = x1;
+    assign an = (8'hFE & {8{~select}}) | (8'hFD & {8{select}});
+    assign x = (n0 & {8{~select}}) | (n1 & {8{select}});
     
     bcd_to_7_seg bcd(x, seg);
     
     initial begin
-        an_s[0] = 8'hFE;
-        an_s[1] = 8'hFD;
         cycle = 0;
         select = 0;
     end
     
     always @ (posedge clk)
     begin
-        cycle = (cycle + 1) % 10000;
-        if (cycle == 0) begin
-            select = select + 1'd1;
-            x <= x_s[select];
-        end
-        else if (cycle == 1500) begin
-            an = an_s[select];
-        end
-        else if (cycle == 9500) begin
-            an = 8'hFF;
+        cycle = cycle + 1;
+        if (cycle >= 5000) begin
+            cycle <= 0;
+            select <= ~select;
         end
     end
 endmodule
