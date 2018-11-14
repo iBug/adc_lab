@@ -70,7 +70,7 @@ module seg_manager(
     always @ (posedge clk)
     begin
         cycle = cycle + 1;
-        if (cycle >= 1000) begin
+        if (cycle >= 5000) begin
             cycle <= 0;
             select <= select + 2'd1;
         end
