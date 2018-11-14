@@ -20,67 +20,66 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module bcd_to_7_seg(
-    input [3:0] x,
-    output reg [6:0] seg
-    );
-    
-    always @ (x)
-    begin
-        case (x)
-            4'b0000: seg <= 7'b1000000;
-            4'b0001: seg <= 7'b1111001;
-            4'b0010: seg <= 7'b0100100;
-            4'b0011: seg <= 7'b0110000;
-            4'b0100: seg <= 7'b0011001;
-            4'b0101: seg <= 7'b0010010;
-            4'b0110: seg <= 7'b0000010;
-            4'b0111: seg <= 7'b1111000;
-            4'b1000: seg <= 7'b0000000;
-            4'b1001: seg <= 7'b0010000;
-            default: seg <= 7'b0111111;
-        endcase
-    end
-endmodule
-
 module seg_manager(
-    input [3:0] x0, x1, x2, x3,
-    input clk,
+    input [15:0] sw,
+    input clk,  // Please supply 100 MHz
     output [6:0] seg,
-    output reg [7:0] an
+    output [7:0] an
     );
     
-    wire [3:0] x_s, x_s0, x_s1, x_s2, x_s3;
-    reg [1:0] select;
-    reg [7:0] an_s [3:0];
-    reg ctrl;
+    wire [3:0] x;
+    wire [3:0] x_s [7:0];
+    wire [15:0] x_i [7:0];
+    reg [2:0] select;
+    reg an_off;
+    integer cycle;
     
-    assign x_s0 = {x3[0], x2[0], x1[0], x0[0]};
-    assign x_s1 = {x3[1], x2[1], x1[1], x0[1]};
-    assign x_s2 = {x3[2], x2[2], x1[2], x0[2]};
-    assign x_s3 = {x3[3], x2[3], x1[3], x0[3]};
-    assign x_s = {x_s3[select], x_s2[select], x_s1[select], x_s0[select]};
+    assign x_i[0] = (sw / 1);
+    assign x_i[1] = (sw / 10);
+    assign x_i[2] = (sw / 100);
+    assign x_i[3] = (sw / 1000);
+    assign x_i[4] = (sw / 10000);
+    assign x_i[5] = (sw / 100000);
+    assign x_i[6] = (sw / 1000000);
+    assign x_i[7] = (sw / 10000000);
     
-    bcd_to_7_seg bcd(x_s, seg);
+    assign x_s[0] = (x_i[0] % 10);
+    assign x_s[1] = (x_i[1] == 0) ? 15 : (x_i[1] % 10);
+    assign x_s[2] = (x_i[2] == 0) ? 15 : (x_i[2] % 10);
+    assign x_s[3] = (x_i[3] == 0) ? 15 : (x_i[3] % 10);
+    assign x_s[4] = (x_i[4] == 0) ? 15 : (x_i[4] % 10);
+    assign x_s[5] = (x_i[5] == 0) ? 15 : (x_i[5] % 10);
+    assign x_s[6] = (x_i[6] == 0) ? 15 : (x_i[6] % 10);
+    assign x_s[7] = (x_i[7] == 0) ? 15 : (x_i[7] % 10);
+
+    assign an = (8'hFE & {8{select == 0}}) | (8'hFD & {8{select == 1}}) |
+                (8'hFB & {8{select == 2}}) | (8'hF7 & {8{select == 3}}) |
+                (8'hEF & {8{select == 4}}) | (8'hDF & {8{select == 5}}) |
+                (8'hBF & {8{select == 6}}) | (8'h7F & {8{select == 7}}) |
+                (8'hFF & {8{an_off}});
+    assign x = (x_s[0] & {8{select == 0}}) | (x_s[1] & {8{select == 1}}) |
+               (x_s[2] & {8{select == 2}}) | (x_s[3] & {8{select == 3}}) |
+               (x_s[4] & {8{select == 4}}) | (x_s[5] & {8{select == 5}}) |
+               (x_s[6] & {8{select == 6}}) | (x_s[7] & {8{select == 7}});
+    
+    bcd_to_7_seg bcd(x, seg);
     
     initial begin
-        an_s[0] = 8'hFE;
-        an_s[1] = 8'hFD;
-        an_s[2] = 8'hFB;
-        an_s[3] = 8'hF7;
+        cycle = 0;
+        select = 0;
+        an_off = 0;
     end
     
     always @ (posedge clk)
     begin
-        if (ctrl == 0) begin
-            ctrl <= 1;
-            an = 8'hFF;
-            select <= select + 2'd1;
+        cycle = cycle + 1;
+        if (cycle == 19600) begin
+            an_off <= 1; // Delay conflict
         end
-        else begin
-            ctrl <= 0;
-            #500 an = an_s[select];
+        else if (cycle >= 20000) begin
+            an_off <= 0;
+            cycle <= 0;
+            select <= select + 2'd1;
         end
     end
 endmodule
-

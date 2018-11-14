@@ -24,14 +24,14 @@ module seg_manager(
     input [15:0] sw,
     input clk,  // Please supply 100 MHz
     output [6:0] seg,
-    output reg [7:0] an
+    output [7:0] an
     );
     
-    reg [3:0] x;
+    wire [3:0] x;
     wire [3:0] x_s [7:0];
     wire [15:0] x_i [7:0];
-    reg [7:0] an_s [7:0];
     reg [2:0] select;
+    reg an_off;
     integer cycle;
     
     assign x_i[0] = (sw / 1);
@@ -51,33 +51,35 @@ module seg_manager(
     assign x_s[5] = (x_i[5] == 0) ? 15 : (x_i[5] % 10);
     assign x_s[6] = (x_i[6] == 0) ? 15 : (x_i[6] % 10);
     assign x_s[7] = (x_i[7] == 0) ? 15 : (x_i[7] % 10);
+
+    assign an = (8'hFE & {8{select == 0}}) | (8'hFD & {8{select == 1}}) |
+                (8'hFB & {8{select == 2}}) | (8'hF7 & {8{select == 3}}) |
+                (8'hEF & {8{select == 4}}) | (8'hDF & {8{select == 5}}) |
+                (8'hBF & {8{select == 6}}) | (8'h7F & {8{select == 7}}) |
+                (8'hFF & {8{an_off}});
+    assign x = (x_s[0] & {8{select == 0}}) | (x_s[1] & {8{select == 1}}) |
+               (x_s[2] & {8{select == 2}}) | (x_s[3] & {8{select == 3}}) |
+               (x_s[4] & {8{select == 4}}) | (x_s[5] & {8{select == 5}}) |
+               (x_s[6] & {8{select == 6}}) | (x_s[7] & {8{select == 7}});
     
     bcd_to_7_seg bcd(x, seg);
     
     initial begin
-        an_s[0] = 8'hFE;
-        an_s[1] = 8'hFD;
-        an_s[2] = 8'hFB;
-        an_s[3] = 8'hF7;
-        an_s[4] = 8'hEF;
-        an_s[5] = 8'hDF;
-        an_s[6] = 8'hBF;
-        an_s[7] = 8'h7F;
         cycle = 0;
+        select = 0;
+        an_off = 0;
     end
     
     always @ (posedge clk)
     begin
-        cycle = (cycle + 1) % 20000;
-        if (cycle == 0) begin
-            select = select + 2'd1;
-            x <= x_s[select];
+        cycle = cycle + 1;
+        if (cycle == 19600) begin
+            an_off <= 1; // Delay conflict
         end
-        else if (cycle == 1500) begin
-            an = an_s[select];
-        end
-        else if (cycle == 19500) begin
-            an = 8'hFF;
+        else if (cycle >= 20000) begin
+            an_off <= 0;
+            cycle <= 0;
+            select <= select + 2'd1;
         end
     end
 endmodule
