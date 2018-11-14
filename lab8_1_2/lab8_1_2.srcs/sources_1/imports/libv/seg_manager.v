@@ -22,7 +22,7 @@
 
 module seg_manager(
     input [15:0] sw,
-    input clk,  // Please supply 100 MHz
+    input clk,  // Please supply 5 MHz
     output [6:0] seg,
     output reg [7:0] an
     );
@@ -68,15 +68,15 @@ module seg_manager(
     
     always @ (posedge clk)
     begin
-        cycle = (cycle + 1) % 20000;
+        cycle = (cycle + 1) % 1000;
         if (cycle == 0) begin
             select = select + 2'd1;
             x <= x_s[select];
         end
-        else if (cycle == 1500) begin
+        else if (cycle == 75) begin
             an = an_s[select];
         end
-        else if (cycle == 19500) begin
+        else if (cycle == 975) begin
             an = 8'hFF;
         end
     end

@@ -28,7 +28,9 @@ module main(
     output [15:0] LED
     );
     
+    wire CLK5MHZ, G;
     assign LED = SW;
     
-    seg_manager core(SW, CLK100MHZ, SEG, AN);
+    clk_5MHz(CLK5MHZ, 0, G, CLK100MHZ);
+    seg_manager core(SW, CLK5MHZ, SEG, AN);
 endmodule
