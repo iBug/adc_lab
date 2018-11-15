@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
--- Date        : Thu Nov  8 08:57:23 2018
+-- Date        : Thu Nov  8 08:49:47 2018
 -- Host        : VMware running 64-bit Ubuntu 18.04.1 LTS
--- Command     : write_vhdl -force -mode funcsim
---               /home/vmware/adc_lab/lab8_1_1/lab8_1_1.srcs/sources_1/ip/clk_5MHz/clk_5MHz_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top clk_5MHz -prefix
+--               clk_5MHz_ clk_5MHz_sim_netlist.vhdl
 -- Design      : clk_5MHz
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -17,12 +17,9 @@ use UNISIM.VCOMPONENTS.ALL;
 entity clk_5MHz_clk_5MHz_clk_wiz is
   port (
     clk_out : out STD_LOGIC;
-    reset : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of clk_5MHz_clk_5MHz_clk_wiz : entity is "clk_5MHz_clk_wiz";
 end clk_5MHz_clk_5MHz_clk_wiz;
 
 architecture STRUCTURE of clk_5MHz_clk_5MHz_clk_wiz is
@@ -160,7 +157,7 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       PSEN => '0',
       PSINCDEC => '0',
       PWRDWN => '0',
-      RST => reset
+      RST => '0'
     );
 end STRUCTURE;
 library IEEE;
@@ -170,7 +167,6 @@ use UNISIM.VCOMPONENTS.ALL;
 entity clk_5MHz is
   port (
     clk_out : out STD_LOGIC;
-    reset : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in : in STD_LOGIC
   );
@@ -184,7 +180,6 @@ inst: entity work.clk_5MHz_clk_5MHz_clk_wiz
      port map (
       clk_in => clk_in,
       clk_out => clk_out,
-      locked => locked,
-      reset => reset
+      locked => locked
     );
 end STRUCTURE;

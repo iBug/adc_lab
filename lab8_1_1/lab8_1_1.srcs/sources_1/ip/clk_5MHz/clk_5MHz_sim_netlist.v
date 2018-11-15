@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
-// Date        : Thu Nov  8 08:57:23 2018
+// Date        : Thu Nov  8 08:49:47 2018
 // Host        : VMware running 64-bit Ubuntu 18.04.1 LTS
-// Command     : write_verilog -force -mode funcsim
-//               /home/vmware/adc_lab/lab8_1_1/lab8_1_1.srcs/sources_1/ip/clk_5MHz/clk_5MHz_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top clk_5MHz -prefix
+//               clk_5MHz_ clk_5MHz_sim_netlist.v
 // Design      : clk_5MHz
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -15,34 +15,27 @@
 (* NotValidForBitStream *)
 module clk_5MHz
    (clk_out,
-    reset,
     locked,
     clk_in);
   output clk_out;
-  input reset;
   output locked;
   input clk_in;
 
   (* IBUF_LOW_PWR *) wire clk_in;
   wire clk_out;
   wire locked;
-  wire reset;
 
   clk_5MHz_clk_5MHz_clk_wiz inst
        (.clk_in(clk_in),
         .clk_out(clk_out),
-        .locked(locked),
-        .reset(reset));
+        .locked(locked));
 endmodule
 
-(* ORIG_REF_NAME = "clk_5MHz_clk_wiz" *) 
 module clk_5MHz_clk_5MHz_clk_wiz
    (clk_out,
-    reset,
     locked,
     clk_in);
   output clk_out;
-  input reset;
   output locked;
   input clk_in;
 
@@ -53,7 +46,6 @@ module clk_5MHz_clk_5MHz_clk_wiz
   wire clkfbout_buf_clk_5MHz;
   wire clkfbout_clk_5MHz;
   wire locked;
-  wire reset;
   wire NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED;
@@ -171,7 +163,7 @@ module clk_5MHz_clk_5MHz_clk_wiz
         .PSEN(1'b0),
         .PSINCDEC(1'b0),
         .PWRDWN(1'b0),
-        .RST(reset));
+        .RST(1'b0));
 endmodule
 `ifndef GLBL
 `define GLBL
