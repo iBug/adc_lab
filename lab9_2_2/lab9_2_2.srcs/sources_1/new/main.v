@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-(* use_dsp48 = "no" *)
+(* use_dsp48 = "yes" *)
 module clock_div(
     input clk,
     input reset,
@@ -50,7 +50,7 @@ module clock_div(
 endmodule
 
 
-(* use_dsp48 = "no" *)
+(* use_dsp48 = "yes" *)
 module counter #(parameter COUNT_SIZE = 8)(
     input clk,
     input en,
@@ -73,7 +73,7 @@ module counter #(parameter COUNT_SIZE = 8)(
 endmodule
 
 
-module lab9_2_1(
+module main(
     input CLK100MHZ,
     input Enable,
     input Up,
