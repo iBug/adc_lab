@@ -28,21 +28,23 @@ endmodule
 
 module seg_manager(
     input clk,  // Please supply 5 MHz
-    input [3:0] n0, n1, n2, n3,
+    input [3:0] n0, n1, n2, n3, n4, n5,
     output [6:0] seg,
     output dp,
     output [7:0] an
     );
     
     wire [3:0] x;
-    reg [1:0] select;
+    reg [2:0] select;
     integer cycle;
     
     assign an = (8'hFE & {8{select == 0}}) | (8'hFD & {8{select == 1}}) |
-                (8'hFB & {8{select == 2}}) | (8'hF7 & {8{select == 3}});
+                (8'hFB & {8{select == 2}}) | (8'hF7 & {8{select == 3}}) |
+                (8'hEF & {8{select == 4}}) | (8'hDF & {8{select == 5}});
     assign x = (n0 & {4{select == 0}}) | (n1 & {4{select == 1}}) |
-               (n2 & {4{select == 2}}) | (n3 & {4{select == 3}});
-    assign dp = ~select[0];
+               (n2 & {4{select == 2}}) | (n3 & {4{select == 3}}) |
+               (n4 & {4{select == 4}}) | (n5 & {4{select == 5}});
+    assign dp = ~((select == 2) | (select == 4));
     
     bcd_to_7_seg bcd(x, seg);
     
@@ -55,8 +57,10 @@ module seg_manager(
     begin
         cycle = cycle + 1;
         if (cycle >= 5000) begin
-            cycle <= 0;
-            select <= select + 1;
+            cycle = 0;
+            select = select + 1;
+            if (select > 5)
+                select = 0;
         end
     end
 endmodule

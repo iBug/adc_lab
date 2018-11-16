@@ -33,7 +33,7 @@ module clock_divider(
 
     always @(posedge CLK5MHZ) begin
         n = n + 1;
-        if (n >= 250000) begin
+        if (n >= 25000) begin
             n = 0;
             clk = ~clk;
         end
@@ -51,29 +51,33 @@ module lab9_3_1(
     output [7:0] AN
     );
 
-    wire CLK5MHZ, CLK10HZ;
+    wire CLK5MHZ, CLK100HZ;
     wire clk;
     clk_5MHz ip_clock (CLK5MHZ, CLK100MHZ);
-    clock_divider clock (CLK5MHZ, CLK10HZ);
+    clock_divider clock (CLK5MHZ, CLK100HZ);
 
-    assign clk = (CLK10HZ & ~Reset) | (CLK5MHZ & Reset);
+    assign clk = (CLK100HZ & ~Reset) | (CLK5MHZ & Reset);
 
-    reg [3:0] num0, num1, num2, num3;
-    wire [3:0] Q0, Q1, Q2, Q3;
-    wire th0, th1, th2, th3;
+    reg [3:0] num0, num1, num2, num3, num4, num5;
+    wire [3:0] Q0, Q1, Q2, Q3, Q4, Q5;
+    wire th0, th1, th2, th3, th4, th5;
     ip_counter_10 n0 (clk, Enable, Reset, th0, Q0);
     ip_counter_10 n1 (clk, Enable & th0, Reset, th1, Q1);
-    ip_counter_6 n2 (clk, Enable & th0 & th1, Reset, th2, Q2);
-    ip_counter_10 n3 (clk, Enable & th0 & th1 & th2, Reset, th3, Q3);
+    ip_counter_10 n2 (clk, Enable & th0 & th1, Reset, th2, Q2);
+    ip_counter_6 n3 (clk, Enable & th0 & th1 & th2, Reset, th3, Q3);
+    ip_counter_10 n4 (clk, Enable & th0 & th1 & th2 & th3, Reset, th4, Q4);
+    ip_counter_6 n5 (clk, Enable & th0 & th1 & th2 & th3 & th4, Reset, th5, Q5);
 
-    seg_manager seg (CLK5MHZ, num0, num1, num2, num3, SEG, DP, AN);
+    seg_manager seg (CLK5MHZ, num0, num1, num2, num3, num4, num5, SEG, DP, AN);
 
-    always @(Q0 or Q1 or Q2 or Q3 or Hold) begin
+    always @(Q0 or Q1 or Q2 or Q3 or Q4 or Q5 or Hold) begin
         if (~Hold) begin
             num0 <= Q0;
             num1 <= Q1;
             num2 <= Q2;
             num3 <= Q3;
+            num4 <= Q4;
+            num5 <= Q5;
         end
     end
 endmodule
