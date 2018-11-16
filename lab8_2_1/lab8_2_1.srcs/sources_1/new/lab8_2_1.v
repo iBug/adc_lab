@@ -19,24 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module D_trigger(input D, input clk, input reset, output reg Q);
-    initial Q <= 0;
-    always @(posedge clk or posedge reset) begin
-        if (reset)
-            Q <= 0;
-        else
-            Q <= D;
-    end
-endmodule
-
-module dec_counter(input clk, input reset, output carry_s, output [3:0] N);
-    wire Q, carry;
-    counter_4b c (clk, reset, carry, N);
-    // Double-buffer with inverted clock so carry signal goes at 0 not 9
-    D_trigger step_1 (carry, ~clk, reset, Q),
-              step_2 (Q, clk, reset, carry_s);
-endmodule
-
 module lab8_2_1(
     input en,
     input reset,
@@ -54,14 +36,13 @@ module lab8_2_1(
     clk_5MHz clk_catalog (CLK5MHZ, CLK100MHZ);
 
     wire [3:0] N0, N1;
-    wire clk0, clk1, carry0, carry1;
-    assign carry = carry1;
+    wire c_clk, th0, th1;
+    assign carry = th1;
 
-    assign clk0 = (clk & ~reset) | (CLK5MHZ & reset);
-    assign clk1 = (carry0 & ~reset) | (CLK5MHZ & reset);
+    assign c_clk = (clk & ~reset) | (CLK5MHZ & reset);
 
-    dec_counter counter0 (clk0, reset, carry0, N0),
-                counter1 (clk1, reset, carry1, N1);
+    counter_4b counter0 (c_clk, 1'b1, reset, th0, N0),
+               counter1 (c_clk, th0, reset, th1, N1);
 
     seg_manager seg_core (N0, N1, CLK5MHZ, SEG, AN);
 

@@ -55,6 +55,7 @@
 COMPONENT counter_4b
   PORT (
     CLK : IN STD_LOGIC;
+    CE : IN STD_LOGIC;
     SCLR : IN STD_LOGIC;
     THRESH0 : OUT STD_LOGIC;
     Q : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
@@ -69,6 +70,7 @@ END COMPONENT;
 your_instance_name : counter_4b
   PORT MAP (
     CLK => CLK,
+    CE => CE,
     SCLR => SCLR,
     THRESH0 => THRESH0,
     Q => Q

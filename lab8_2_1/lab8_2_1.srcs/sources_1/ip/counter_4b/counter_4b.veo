@@ -56,6 +56,7 @@
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 counter_4b your_instance_name (
   .CLK(CLK),          // input wire CLK
+  .CE(CE),            // input wire CE
   .SCLR(SCLR),        // input wire SCLR
   .THRESH0(THRESH0),  // output wire THRESH0
   .Q(Q)              // output wire [3 : 0] Q
