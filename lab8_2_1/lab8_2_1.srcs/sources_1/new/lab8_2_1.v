@@ -56,7 +56,7 @@ module lab8_2_1(
         if (en) begin
             count = count + 1;
             if (count >= CLK_CYCLE / 2) begin
-                count <= 0;
+                count = 0;
                 clk_e <= ~clk_e;
             end
         end

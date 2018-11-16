@@ -68,7 +68,7 @@ module seg_manager(
     begin
         cycle = cycle + 1;
         if (cycle >= 5000) begin
-            cycle <= 0;
+            cycle = 0;
             select <= ~select;
         end
     end
