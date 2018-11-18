@@ -97,6 +97,7 @@ module new_demo(
     input Enable,
     input Hold,
     input Reset,
+    input All_Up,
     output [15:0] LED,
     output [6:0] SEG,
     output DP,
@@ -123,9 +124,9 @@ module new_demo(
     ip_counter_6 n5 (clk, Enable & th0 & th1 & th2 & th3 & th4, Reset, th5, Q5);
     ip_counter_24 n6 (clk, Enable & th0 & th1 & th2 & th3 & th4 & th5, Reset, th6, Q6);
 
-    seg_manager seg (CLK5MHZ, num0, num1, num2, num3, num4, num5, num6, num7, SEG, DP, AN);
+    seg_manager seg (CLK5MHZ, All_Up, num0, num1, num2, num3, num4, num5, num6, num7, SEG, DP, AN);
 
-    always @(Q0 or Q1 or Q2 or Q3 or Q4 or Q5 or Hold) begin
+    always @(Q0 or Q1 or Q2 or Q3 or Q4 or Q5 or Q6 or Hold) begin
         if (~Hold) begin
             num0 <= Q0;
             num1 <= Q1;

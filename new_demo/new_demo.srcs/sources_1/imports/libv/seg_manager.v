@@ -28,6 +28,7 @@ endmodule
 
 module seg_manager(
     input clk,  // Please supply 5 MHz
+    input all_up,
     input [3:0] n0, n1, n2, n3, n4, n5, n6, n7,
     output [6:0] seg,
     output dp,
@@ -39,7 +40,7 @@ module seg_manager(
     integer cycle;
     wire [7:0] e; // whether these numbers are enabled
     assign e[7] = {|n7}; // if number 7 is not empty
-    assign e[6] = e[7] | {|n6};
+    assign e[6] = e[7] | {|n6} | all_up;
     assign e[5] = e[6] | {|n5};
     assign e[4] = e[5] | {|n4};
     assign e[3] = e[4] | {|n3};
@@ -48,7 +49,7 @@ module seg_manager(
     assign an = (8'hFE & {8{select == 0}}) | (8'hFD & {8{select == 1}}) |
                 (8'hFB & {8{select == 2}}) | (8'hF7 & {8{select == 3}}) |
                 (8'hEF & {8{select == 4}}) | (8'hDF & {8{select == 5}}) |
-                (8'hEF & {8{select == 6}}) | (8'hDF & {8{select == 7}});
+                (8'hBF & {8{select == 6}}) | (8'h7F & {8{select == 7}});
     assign x = (n0 & {4{select == 0}}) | (n1 & {4{select == 1}}) |
                (n2 & {4{select == 2}}) | (n3 & {4{select == 3}}) |
                (n4 & {4{select == 4}}) | (n5 & {4{select == 5}}) |
