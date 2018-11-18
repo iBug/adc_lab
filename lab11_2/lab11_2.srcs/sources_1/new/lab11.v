@@ -137,14 +137,21 @@ module lab11(
     wire CLK5MHZ;
     ip_clock clock_converter (CLK5MHZ, CLK100MHZ);
 
+    reg [3:0] D_ROM [31:0];
     wire [7:0] result;
+    wire [3:0] a, b;
     wire clk, c_start, c_add, c_shift, c_done;
     assign clk = CLK5MHZ;
     assign done = c_done;
+    assign a = D_ROM[aa];
+    assign b = D_ROM[5'h10 | ab];
 
     seg_manager seg_core(CLK5MHZ, result, SEG, AN);
     assign DP = 1; // keep it off
 
     multiplier_control controller (clk, start, c_start, c_add, c_shift, c_done);
-    multiplier_data data_processor (clk, aa, ab, c_start, c_add, c_shift, c_done, result);
+    multiplier_data data_processor (clk, a, b, c_start, c_add, c_shift, c_done, result);
+
+    initial
+        $readmemh("ROM_data.txt", D_ROM, 0, 31);
 endmodule
