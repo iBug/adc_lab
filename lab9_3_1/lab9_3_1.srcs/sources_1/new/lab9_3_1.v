@@ -58,17 +58,19 @@ module lab9_3_1(
 
     assign clk = (CLK100HZ & ~Reset) | (CLK5MHZ & Reset);
 
-    reg [3:0] num0, num1, num2, num3, num4, num5;
+    reg [3:0] num0, num1, num2, num3, num4, num5, num6, num7;
     wire [3:0] Q0, Q1, Q2, Q3, Q4, Q5;
-    wire th0, th1, th2, th3, th4, th5;
+    wire [7:0] Q6;
+    wire th0, th1, th2, th3, th4, th5, th6;
     ip_counter_10 n0 (clk, Enable, Reset, th0, Q0);
     ip_counter_10 n1 (clk, Enable & th0, Reset, th1, Q1);
     ip_counter_10 n2 (clk, Enable & th0 & th1, Reset, th2, Q2);
     ip_counter_6 n3 (clk, Enable & th0 & th1 & th2, Reset, th3, Q3);
     ip_counter_10 n4 (clk, Enable & th0 & th1 & th2 & th3, Reset, th4, Q4);
     ip_counter_6 n5 (clk, Enable & th0 & th1 & th2 & th3 & th4, Reset, th5, Q5);
+    ip_counter_24 n6 (clk, Enable & th0 & th1 & th2 & th3 & th4 & th5, Reset, th6, Q6);
 
-    seg_manager seg (CLK5MHZ, num0, num1, num2, num3, num4, num5, SEG, DP, AN);
+    seg_manager seg (CLK5MHZ, num0, num1, num2, num3, num4, num5, num6, num7, SEG, DP, AN);
 
     always @(Q0 or Q1 or Q2 or Q3 or Q4 or Q5 or Hold) begin
         if (~Hold) begin
@@ -78,6 +80,8 @@ module lab9_3_1(
             num3 <= Q3;
             num4 <= Q4;
             num5 <= Q5;
+            num6 <= Q6 % 10;
+            num7 <= Q6 / 10;
         end
     end
 endmodule

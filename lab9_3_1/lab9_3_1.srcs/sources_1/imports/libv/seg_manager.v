@@ -28,7 +28,7 @@ endmodule
 
 module seg_manager(
     input clk,  // Please supply 5 MHz
-    input [3:0] n0, n1, n2, n3, n4, n5,
+    input [3:0] n0, n1, n2, n3, n4, n5, n6, n7,
     output [6:0] seg,
     output dp,
     output [7:0] an
@@ -37,16 +37,27 @@ module seg_manager(
     wire [3:0] x;
     reg [2:0] select;
     integer cycle;
+    wire [7:0] e; // whether these numbers are enabled
+    assign e[7] = {|n7}; // if number 7 is not empty
+    assign e[6] = e[7] | {|n6};
+    assign e[5] = e[6] | {|n5};
+    assign e[4] = e[5] | {|n4};
+    assign e[3] = e[4] | {|n3};
+    assign e[2:0] = 3'h7; // they're always up
     
     assign an = (8'hFE & {8{select == 0}}) | (8'hFD & {8{select == 1}}) |
                 (8'hFB & {8{select == 2}}) | (8'hF7 & {8{select == 3}}) |
-                (8'hEF & {8{select == 4}}) | (8'hDF & {8{select == 5}});
+                (8'hEF & {8{select == 4}}) | (8'hDF & {8{select == 5}}) |
+                (8'hEF & {8{select == 6}}) | (8'hDF & {8{select == 7}});
     assign x = (n0 & {4{select == 0}}) | (n1 & {4{select == 1}}) |
                (n2 & {4{select == 2}}) | (n3 & {4{select == 3}}) |
-               (n4 & {4{select == 4}}) | (n5 & {4{select == 5}});
-    assign dp = ~((select == 2) | (select == 4));
+               (n4 & {4{select == 4}}) | (n5 & {4{select == 5}}) |
+               (n6 & {4{select == 6}}) | (n7 & {4{select == 7}});
     
-    bcd_to_7_seg bcd(x, seg);
+    wire [6:0] seg_inner;
+    bcd_to_7_seg bcd(x, seg_inner);
+    assign seg = seg_inner | ~{7{e[select]}}; // ~e = disabled
+    assign dp = ~((e[2] & (select == 2)) | (e[4] & (select == 4)) | (e[6] & (select == 6)));
     
     initial begin
         cycle = 0;
@@ -59,8 +70,6 @@ module seg_manager(
         if (cycle >= 5000) begin
             cycle = 0;
             select = select + 1;
-            if (select > 5)
-                select = 0;
         end
     end
 endmodule
