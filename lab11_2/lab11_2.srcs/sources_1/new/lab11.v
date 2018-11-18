@@ -101,15 +101,11 @@ module multiplier_control(
     end
 
     always @(start or state) begin
-        if (state == DONE) begin
-            if (start)
-                nextstate <= START;
-            else
-                nextstate <= DONE;
-        end
+        if (start)
+            nextstate <= START;
         else begin
-            // ignore [start] signal
             case(state)
+                DONE: nextstate <= DONE;
                 START: nextstate <= A1;
                 A1: nextstate <= S1;
                 S1: nextstate <= A2;
