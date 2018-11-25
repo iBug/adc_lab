@@ -51,12 +51,15 @@ module lab10_1_1(
 
     // always block to compute next state
     always @(state or a) begin
-        case(state)
-            S0: nextstate <= S1;
-            S1: nextstate <= S2;
-            S2: nextstate <= S3;
-            S3: nextstate <= S1;
-        endcase
+        if (a)
+            case(state)
+                S0: nextstate <= S1;
+                S1: nextstate <= S2;
+                S2: nextstate <= S3;
+                S3: nextstate <= S1;
+            endcase
+        else
+            nextstate <= state;
     end
 
     // always block to compute output
