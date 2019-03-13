@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
-// Date        : Fri Nov 16 19:30:28 2018
+// Date        : Fri Dec 14 13:21:00 2018
 // Host        : VMware running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode synth_stub
-//               /home/vmware/adc_lab/lab9_3_1/lab9_3_1.srcs/sources_1/ip/ip_counter_10/ip_counter_10_stub.v
+//               /home/vmware/adc_lab/new_demo/new_demo.srcs/sources_1/ip/ip_counter_10/ip_counter_10_stub.v
 // Design      : ip_counter_10
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tcsg324-1
